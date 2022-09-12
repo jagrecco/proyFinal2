@@ -68,9 +68,7 @@ const conexion = {
         }
     ],
 
-    carrito: [
-
-    ]
+    carrito: []
 
     },
 
