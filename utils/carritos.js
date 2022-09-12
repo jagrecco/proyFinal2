@@ -14,7 +14,7 @@ const create = () => {
   return id
 } 
 
-const deleteById = (i) => {    
+const deleteById = (i) => {    //elimina carrito por id
   let index = carts.findIndex(x => x.id == i) 
   if (index == -1) {
     return ({ error: 'Carrito no encontrado' })
@@ -24,12 +24,12 @@ const deleteById = (i) => {
   return "Carrito Eliminado"  
 }
 
-const getById = (x) => {    
+const getById = (x) => {    //retorna carrito segun id
   if (carts.length === 0) {return ({"Error" : "No hay Carritos"})} 
   return (carts.find(el => el.id == x) || { error: 'Carrito no encontrado' })  
 }  
 
-const addProduct = (idCarrito, idProducto) => {    
+const addProduct = (idCarrito, idProducto) => {    //agrega productos a un carrito
   if (carts.length === 0) {return ({"Error" : "No hay Carritos"})} 
 
   let indexCart = carts.findIndex(el => el.id == idCarrito)
@@ -52,7 +52,7 @@ const addProduct = (idCarrito, idProducto) => {
 }  
 
 
-const deletProduct = (idCarrito, idProducto) => {    
+const deletProduct = (idCarrito, idProducto) => {    //elimina un producto de un carrito
   if (carts.length === 0) {return ({"Error" : "No hay Carritos"})} 
 
   let indexCart = carts.findIndex(el => el.id == idCarrito)
