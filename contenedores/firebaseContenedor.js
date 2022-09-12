@@ -36,7 +36,7 @@ class ContenedorFirebase{
             return prods;
         }
         catch (error) {
-            console.log("Error al acceder a productos " + error)
+            console.log("Error al conectar a la fuente de datos: " + error)
         }
         
     }
@@ -48,7 +48,7 @@ class ContenedorFirebase{
 
         }
         catch(error){
-            console.log("Error al acceder a productos " + error)
+            console.log("Error al conectar a la fuente de datos: " + error)
         }
     }
 
@@ -61,7 +61,7 @@ class ContenedorFirebase{
 
         }
         catch (error) {
-            console.log("Error al guardar " + error);
+            console.log("Error al conectar a la fuente de datos: " + error)
         }
         
     }
@@ -73,7 +73,7 @@ class ContenedorFirebase{
             return res;
         }
         catch(error) {
-            console.log(`Error al eliminar ${idProducto} ` + error)
+            console.log("Error al conectar a la fuente de datos: " + error)
         }
 
     }
@@ -85,7 +85,7 @@ class ContenedorFirebase{
             return res;
         }
         catch(error) {
-            console.log(`Error al editar ${idProducto} ` + error)
+            console.log("Error al conectar a la fuente de datos: " + error)
         }
         
     }

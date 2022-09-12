@@ -16,36 +16,69 @@ class ContenedorMongo{
     }
 
     async listarTodos(){
-        
-        return await ProdModel.find();
-        
+        try {
+            return await ProdModel.find();
+        }
+        catch (error){
+            console.log("Error al conectar a la fuente de datos: " + error)
+        }
     }
 
     async listarUno(idProducto){
 
-        return await ProdModel.find({_id: idProducto});
+        try {
+            return await ProdModel.find({_id: idProducto});
+        }
+        catch (error){
+            console.log("Error al conectar a la fuente de datos: " + error)
+        }
 
     }
 
     async guardarUno(objeto) {
-        const productoNuevo=ProdModel(objeto)
-        await productoNuevo.save()
-        return objeto;
+
+        try {
+            const productoNuevo=ProdModel(objeto)
+            await productoNuevo.save()
+            return objeto;
+        }
+        catch (error){
+            console.log("Error al conectar a la fuente de datos: " + error)
+        }
+
     }
 
     async borrarUno(idProducto){
-        const productos = await ProdModel.deleteOne({_id: idProducto});
-        return productos;
+
+        try {
+            const productos = await ProdModel.deleteOne({_id: idProducto});
+            return productos;
+        }
+        catch (error){
+            console.log("Error al conectar a la fuente de datos: " + error)
+        }
+
     }
 
     async editaUno(idProducto, objeto) {
-        
-        return ProdModel.findOneAndUpdate(idProducto, objeto,{new: true});
-        
+
+        try {
+            return ProdModel.findOneAndUpdate(idProducto, objeto,{new: true});
+        }
+        catch (error){
+            console.log("Error al conectar a la fuente de datos: " + error)
+        }
+
     }
 
     async terminaConexion(){
-        await mongoose.connection.close()
+
+        try {
+            await mongoose.connection.close();
+        }
+        catch (error){
+            console.log("Error al conectar a la fuente de datos: " + error)
+        }
     }
 }
 

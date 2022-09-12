@@ -1,44 +1,33 @@
-let productosDao;
-let carritosDao;
-
-//import ProductosDao from "./daos/archivoProductosDao.js"
-
-import ProductosDao from "./mongoProductosDao.js"
-
-productosDao = new ProductosDao()
-
 import dotenv from 'dotenv';
 dotenv.config();
 
+let productosDao;
+let carritosDao;
+
 const PERS = process.env.PERS || "memoria";
 
-/*switch (PERS) {
+switch (PERS) {
   case 'mongoDB':
-
-    const ProductosDaoMongoDb = await (async () => {let {ProductosDaoMongoDb} = await import('./productos/ProductosDaoMongoDb.js'); return ProductosDaoMongoDb})();     
-    const CarritosDaoMongoDb = await (async () => {let {CarritosDaoMongoDb} = await import('./carritos/CarritosDaoMongoDb.js'); return CarritosDaoMongoDb})();    
-    productosDao = new ProductosDaoMongoDb();
-    carritosDao = new CarritosDaoMongoDb();
-
-//    const TmpMongoProductos = import('./mongoProductosDao.js');
-//    productosDao = new TmpMongoProductos();
+    import ("./mongoProductosDao.js")
+      .then (module => productosDao = new module.default)
 
     break;
 
   case 'archivo':
-    const TmpArchProductos = import('./archivoProductosDao.js');
-    productosDao = new TmpArchProductos();
+    import ("./archivoProductosDao.js")
+        .then (module => productosDao = new module.default)
     break; 
 
   case 'memoria':
-    const TmpMemProductos = import('./memoriaDao.js');
-    productosDao = new TmpMemProductos();
+    case 'mongoDB':
+      import ("./memoriaProductosDao.js")
+        .then (module => productosDao = new module.default)
     break;
 
   case 'firebase':
-    const TmpFireProductos = import('./firebaseProductosDao.js');
-    productosDao = new TmpFireProductos();
+    import ("./firebaseProductosDao.js")
+        .then (module => productosDao = new module.default)
     break;    
     
-} */
+}
 export {productosDao, carritosDao}

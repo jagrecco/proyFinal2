@@ -13,55 +13,41 @@ const products = Router()
 
 
 products.get("/", async (req, res) => {
-  console.log("la ruta llegó")
-  /* const listado = await productos.listarTodos()
-console.log(listado)
-console.log(listado.length + " documentos.") */
-
-const productos = await productosDao.listarTodos();
-  /* const productos = getAll() */
+  /* console.log("la ruta llegó") */  
+  const productos = await productosDao.listarTodos();
   console.log(productos)
   res.status(200).json(productos);
 });
 
-/* products.get("/:id", (req, res) => {  
-  let id = req.params.id    
-  let data = getById(id)   
-  res.status(201).json(data)
+products.get("/:id", async (req, res) => {  
+  const { id } = req.params    
+  const productos = await productosDao.listarUno(id);
+  res.status(201).json(productos)
 });
 
-products.post("/", (req, res) => { 
-  let login = isLogin()
-  if (login) {
-    const {name, description, code, thumbnail, price, stock} = req.body
-    const data = save({name, description, code, thumbnail, price, stock})  
-    res.status(201).json(data) 
-  } else {
-    res.json({ error : -1, descripcion: "ruta '/' método 'POST' no autorizada" })
-  }
+products.post("/", async (req, res) => { 
+  
+  const {nombre, descripcion, codigo, foto, precio, stock, timestamp} = req.body
+  const productos = await productosDao.guardarUno({nombre, descripcion, codigo, foto, precio, stock, timestamp})  
+  res.status(201).json(productos)
+
 });
 
-products.delete("/:id", (req, res) => { 
-  let login = isLogin()
-  if (login) {
-    let id = req.params.id  
-    const data = deleteById(id)  
-    res.json(data) 
-  } else {
-    res.json({ error : -1, descripcion: `ruta '/${id}' método 'DELETE' no autorizada` })
-  }
+products.delete("/:id", async (req, res) => { 
+
+  const { id } = req.params  
+  const data = await productosDao.borrarUno(id)
+  res.json(data) 
+
 });
 
-products.put("/:id", (req, res) => {
-  let login = isLogin()
-  if (login) {
-    let id = parseInt(req.params.id)
-    const {name, description, code, thumbnail, price, stock} = req.body
-    const data = changeById(id, {name, description, code, thumbnail, price, stock})  
-    res.json(data) 
-  } else {
-    res.json({ error : -1, descripcion: `ruta '/${id}' método 'PUT' no autorizada` })
-  } 
+products.put("/:id", async (req, res) => {
+
+  const id = parseInt(req.params.id)
+  const {nombre, descripcion, codigo, foto, precio, stock, timestamp} = req.body
+  const data = await productosDao.editaUno(id, {nombre, descripcion, codigo, foto, precio, stock, timestamp})  
+  res.json(data) 
+
 });
- */
+
 export default products;

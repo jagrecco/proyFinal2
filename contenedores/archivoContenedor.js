@@ -1,4 +1,3 @@
-/* const fs = require("fs") */
 import fs from "fs";
 import conexion from "../config/config.js"
 
@@ -15,20 +14,37 @@ class ContenedorArchivo{
     }
 
     async listarTodos(){
+
+      try {
         
         leedata();
         return prods;
 
+      }
+      catch (error) {
+        console.log("Error al conectar a la fuente de datos: " + error)
+      }
+
     }
 
     async listarUno(idProducto){
+
+      try {
+        
         leedata();
         if (prods.length === 0) {return ({"Error" : "Archivo Vacio"})} 
         return (prods.find(el => el.id == idProducto) || { error: 'Producto no encontrado' })  
+
+      }
+      catch (error) {
+        console.log("Error al conectar a la fuente de datos: " + error)
+      }
     }
 
     async guardarUno(objeto) {
 
+      try {
+        
         id ++;
         const timestamp = new Date().getTime();
         objeto.id = id;
@@ -36,38 +52,51 @@ class ContenedorArchivo{
         prods.push(objeto);
         persiste(prods);
         return objeto;
-            
+
+      }
+      catch (error) {
+        console.log("Error al conectar a la fuente de datos: " + error)
+      }
 
     }
 
     async borrarUno(idProducto){
 
-        const index = prods.findIndex(x => x.id == idProducto);
-
+      try {
+        
+        const index = prods.findIndex(x => x.id == idProducto);  
         if (index == -1) {
           return ({ error: 'Producto no encontrado' });
         }  
         prods.splice(index, 1);
-
         persiste(prods);
-
         return "Producto Eliminado"
+
+      }
+      catch (error) {
+        console.log("Error al conectar a la fuente de datos: " + error)
+      }
 
     }
 
     async editaUno(idProducto, objeto) {
 
+      try {
+        
         const index = prods.findIndex(x => x.id == idProducto)
         if (index == -1) {
             return ({ error: 'Producto no encontrado' });
         }  
         objeto.id = idProducto;
         objeto.timestamp = prods[index].timestamp;
-        prods[index] = objeto;
-        
+        prods[index] = objeto;        
         persiste(prods);
-
         return "Producto Reemplazado";
+
+      }
+      catch (error) {
+        console.log("Error al conectar a la fuente de datos: " + error)
+      }
 
     }
 
