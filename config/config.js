@@ -4,7 +4,8 @@ const conexion = {
     archivo: { ruta: "./db" },
 
     memoria: {
-        productos: [
+        productos:[],
+        OTROSproductos: [
         {
             nombre: 'Escuadra',
             descripcion: 'Escuadra plástica',

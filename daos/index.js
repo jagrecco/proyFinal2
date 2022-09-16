@@ -19,9 +19,11 @@ switch (PERS) {
     break; 
 
   case 'memoria':
-    case 'mongoDB':
-      import ("./memoriaProductosDao.js")
-        .then (module => productosDao = new module.default)
+    import ("./memoriaProductosDao.js")
+      .then (module => productosDao = new module.default)
+
+    import ("./memoriaCarritoDao.js")
+      .then (module => carritosDao = new module.default)
     break;
 
   case 'firebase':
