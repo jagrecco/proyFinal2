@@ -4,12 +4,13 @@ import conexion from "../config/config.js"
 const ruta=conexion.archivo.ruta + "/productos.json";
 
 let id = 0;
-let prods=[]
+/* let prods=[] */
 
 class ContenedorArchivo{
-    constructor(coleccion){
+    constructor(col, ruta){
 
-        this.collection = prods
+      this.col = col
+      this.ruta=ruta
         
     }
 
@@ -17,8 +18,8 @@ class ContenedorArchivo{
 
       try {
         
-        leedata();
-        return prods;
+        await this.leedata();
+        return this.col;
 
       }
       catch (error) {
@@ -31,9 +32,9 @@ class ContenedorArchivo{
 
       try {
         
-        leedata();
-        if (prods.length === 0) {return ({"Error" : "Archivo Vacio"})} 
-        return (prods.find(el => el.id == idProducto) || { error: 'Producto no encontrado' })  
+        await this.leedata();
+        if (this.col.length === 0) {return ({"Error" : "Archivo Vacio"})} 
+        return (this.col.find(el => el.id == idProducto) || { error: 'Producto no encontrado' })  
 
       }
       catch (error) {
@@ -49,9 +50,10 @@ class ContenedorArchivo{
         const timestamp = new Date().getTime();
         objeto.id = id;
         objeto.timestamp = timestamp;
-        prods.push(objeto);
-        persiste(prods);
-        return objeto;
+        this.col.push(objeto);
+        
+        await this.persiste(this.col);
+        return this.col;
 
       }
       catch (error) {
@@ -64,12 +66,12 @@ class ContenedorArchivo{
 
       try {
         
-        const index = prods.findIndex(x => x.id == idProducto);  
+        const index = this.col.findIndex(x => x.id == idProducto);  
         if (index == -1) {
           return ({ error: 'Producto no encontrado' });
         }  
-        prods.splice(index, 1);
-        persiste(prods);
+        this.col.splice(index, 1);
+        await this.persiste(this.col);
         return "Producto Eliminado"
 
       }
@@ -83,14 +85,14 @@ class ContenedorArchivo{
 
       try {
         
-        const index = prods.findIndex(x => x.id == idProducto)
+        const index = this.col.findIndex(x => x.id == idProducto)
         if (index == -1) {
             return ({ error: 'Producto no encontrado' });
         }  
         objeto.id = idProducto;
         objeto.timestamp = prods[index].timestamp;
-        prods[index] = objeto;        
-        persiste(prods);
+        this.col[index] = objeto;        
+        await this.persiste(this.col);
         return "Producto Reemplazado";
 
       }
@@ -100,9 +102,35 @@ class ContenedorArchivo{
 
     }
 
+    /* persiste = async()=>{ */
+    async persiste(arr) {
+
+      try {
+    
+        await fs.promises.writeFile(this.ruta, JSON.stringify(arr, null, 2))
+        
+      }
+      catch(error){
+        console.log(`Problemas al acceder al archivo ` + error)
+      }
+    }
+
+    async leedata (){
+      
+      try {
+        this.col = JSON.parse(await fs.promises.readFile(this.ruta,"utf-8"), null, 2)
+        const cantidad = this.col.length
+        id=this.col[cantidad-1].id
+      }
+      catch (error) {
+        console.log("Archivo de productos no encontrado " + error);
+      }
+    }
+
+
 }
 
-const persiste = async()=>{
+/* const persiste = async()=>{
 
     try {
   
@@ -124,6 +152,6 @@ const leedata = async()=>{
     catch (error) {
       console.log("Archivo de productos no encontrado " + error);
     }
-  }
+  } */
 
 export default ContenedorArchivo

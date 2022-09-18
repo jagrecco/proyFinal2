@@ -1,22 +1,82 @@
 [
   {
-    "nombre": "Escuadra Mágica",
-    "descripcion": "Escuadra plástica magia",
-    "precio": 890,
-    "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png",
+    "nombre": "Producto 1101",
+    "descripcion": "el nuevo producto",
+    "codigo": "AA00AA",
+    "foto": "www.foto.com",
+    "precio": 300,
     "stock": 100,
-    "codigo": "AAB123",
-    "timestamp": 1662521399176,
+    "timestamp": 1663465574375,
     "id": 1
   },
   {
-    "nombre": "Regla",
-    "descripcion": "Regla plástica",
-    "codigo": "AAB123",
-    "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png",
-    "precio": 890,
+    "nombre": "Producto 2101",
+    "descripcion": "el nuevo producto",
+    "codigo": "AA00AA",
+    "foto": "www.foto.com",
+    "precio": 300,
     "stock": 100,
-    "timestamp": 1662950821449,
-    "id": 1
+    "timestamp": 1663465679209,
+    "id": 2
+  },
+  {
+    "nombre": "Producto 3101",
+    "descripcion": "el nuevo producto",
+    "codigo": "AA00AA",
+    "foto": "www.foto.com",
+    "precio": 300,
+    "stock": 100,
+    "timestamp": 1663465712136,
+    "id": 3
+  },
+  {
+    "nombre": "Producto 4101",
+    "descripcion": "el nuevo producto",
+    "codigo": "AA00AA",
+    "foto": "www.foto.com",
+    "precio": 300,
+    "stock": 100,
+    "timestamp": 1663465723857,
+    "id": 4
+  },
+  {
+    "nombre": "Producto 5101",
+    "descripcion": "el nuevo producto",
+    "codigo": "AA00AA",
+    "foto": "www.foto.com",
+    "precio": 300,
+    "stock": 100,
+    "timestamp": 1663469463289,
+    "id": 5
+  },
+  {
+    "nombre": "Producto 6101",
+    "descripcion": "el nuevo producto",
+    "codigo": "AA00AA",
+    "foto": "www.foto.com",
+    "precio": 300,
+    "stock": 100,
+    "timestamp": 1663469756496,
+    "id": 6
+  },
+  {
+    "nombre": "Producto 7101",
+    "descripcion": "el nuevo producto",
+    "codigo": "AA00AA",
+    "foto": "www.foto.com",
+    "precio": 300,
+    "stock": 100,
+    "timestamp": 1663470526356,
+    "id": 7
+  },
+  {
+    "nombre": "Producto 8101",
+    "descripcion": "el nuevo producto",
+    "codigo": "AA00AA",
+    "foto": "www.foto.com",
+    "precio": 300,
+    "stock": 100,
+    "timestamp": 1663471019464,
+    "id": 8
   }
 ]

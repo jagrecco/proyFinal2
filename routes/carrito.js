@@ -8,12 +8,12 @@ const carts = Router();
 /* import { createCart, deleteById, getById, addProduct, deletProduct } from "../controllers/cartsController.js"; */
 
 carts.post("/", async (req, res) => {
-  const data = await carritosDao.guardarUno()
+  const data = await carritosDao.guardarUno({ productos: [] })
   res.status(201).json(data)   
 });
 
 carts.get("/", async (req, res) =>{
-  const datos= await carritosDao.listarTodos()
+  const datos = await carritosDao.listarTodos()
   res.status(201).json(datos)
 })
 

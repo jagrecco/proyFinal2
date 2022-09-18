@@ -7,7 +7,7 @@ const prods=[];
 
 class ProductosDao extends ContenedorArchivo {
     constructor(){
-        super (prods)
+        super (prods, ruta)
     }
 }
 

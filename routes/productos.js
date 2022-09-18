@@ -13,9 +13,9 @@ const products = Router()
 
 
 products.get("/", async (req, res) => {
-  /* console.log("la ruta llegó") */  
+  
   const productos = await productosDao.listarTodos();
-  console.log(productos)
+  
   res.status(200).json(productos);
 });
 

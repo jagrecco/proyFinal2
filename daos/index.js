@@ -15,7 +15,10 @@ switch (PERS) {
 
   case 'archivo':
     import ("./archivoProductosDao.js")
-        .then (module => productosDao = new module.default)
+      .then (module => productosDao = new module.default)
+    
+    import ("./archivoCarritoDao.js")
+      .then (module => carritosDao = new module.default)
     break; 
 
   case 'memoria':
