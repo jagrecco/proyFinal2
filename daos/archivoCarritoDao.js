@@ -6,7 +6,6 @@ const ruta=conexion.archivo.ruta + "/carritos.json";
 
 
 const carrito = []
-/* let id = 0; */
 
 class carritoDao extends ContenedorArchivo {
 

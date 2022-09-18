@@ -24,9 +24,9 @@ carts.delete("/:id", async (req, res) => {
 });
 
 carts.get("/:id/productos", async (req, res) => {  
-  const { id } = req.params    
-  const data = await carritosDao.listarUno(id)   
-  res.status(201).json(data.productos)
+  const { id } = req.params
+  const data = await carritosDao.listarUno(id)
+  res.status(201).json(data) // .json(data.productos)
 });
 
 

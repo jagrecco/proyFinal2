@@ -9,15 +9,15 @@ mongoose.connect(conexion.mongoDbCon.dbURI).then(
 
 
 class ContenedorMongo{
-    constructor(coleccion, esquema){
+    constructor(col, esquema){
 
-        this.collection=ProdModel
+        this.col=col
         
     }
 
     async listarTodos(){
         try {
-            return await ProdModel.find();
+            return await this.col.find();
         }
         catch (error){
             console.log("Error al conectar a la fuente de datos: " + error)
@@ -27,7 +27,7 @@ class ContenedorMongo{
     async listarUno(idProducto){
 
         try {
-            return await ProdModel.find({_id: idProducto});
+            return await this.col.find({_id: idProducto});
         }
         catch (error){
             console.log("Error al conectar a la fuente de datos: " + error)
@@ -38,7 +38,7 @@ class ContenedorMongo{
     async guardarUno(objeto) {
 
         try {
-            const productoNuevo=ProdModel(objeto)
+            const productoNuevo=this.col(objeto)
             await productoNuevo.save()
             return objeto;
         }
@@ -51,7 +51,7 @@ class ContenedorMongo{
     async borrarUno(idProducto){
 
         try {
-            const productos = await ProdModel.deleteOne({_id: idProducto});
+            const productos = await this.col.deleteOne({_id: idProducto});
             return productos;
         }
         catch (error){
@@ -63,7 +63,7 @@ class ContenedorMongo{
     async editaUno(idProducto, objeto) {
 
         try {
-            return ProdModel.findOneAndUpdate(idProducto, objeto,{new: true});
+            return this.col.findOneAndUpdate(idProducto, objeto, {new: true});
         }
         catch (error){
             console.log("Error al conectar a la fuente de datos: " + error)

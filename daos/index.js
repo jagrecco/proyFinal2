@@ -7,10 +7,14 @@ let carritosDao;
 const PERS = process.env.PERS || "memoria";
 
 switch (PERS) {
+  
   case 'mongoDB':
     import ("./mongoProductosDao.js")
       .then (module => productosDao = new module.default)
 
+    import ("./mongoCarritoDao.js")
+      .then (module => carritosDao = new module.default)
+    
     break;
 
   case 'archivo':
