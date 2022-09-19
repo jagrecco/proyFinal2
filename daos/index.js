@@ -36,6 +36,10 @@ switch (PERS) {
   case 'firebase':
     import ("./firebaseProductosDao.js")
         .then (module => productosDao = new module.default)
+
+    import ("./firebaseCarritoDao.js")
+        .then (module => carritosDao = new module.default)
+      
     break;    
     
 }

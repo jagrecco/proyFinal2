@@ -1,7 +1,5 @@
 
 import admin from "firebase-admin";
-/* import { isProviderIdentifier } from "firebase-admin/lib/auth/identifier.js"; */
-
 import conexion from "../config/config.js"
 
 admin.initializeApp({
@@ -10,21 +8,19 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
-/* const query = db.collection("productos"); */ // este era el error al guardar
-
-const prods=[]
+/* const query = db.collection("productos"); // este era el error al guardar*/
 
 class ContenedorFirebase{
     constructor(coleccion){
 
-        this.collection = db.collection(coleccion)
+        this.query = db.collection(coleccion)
         
     }
 
     async listarTodos(){
         try {
-
-            const productos = (await this.collection.get()).docs
+            const prods=[]
+            const productos = (await this.query.get()).docs
     
             productos.forEach((doc)=>{
     
@@ -43,8 +39,11 @@ class ContenedorFirebase{
 
     async listarUno(idProducto){
         try{
-            const productos = await this.collection.doc(idProducto).get();
-            return productos.data();
+            const productos = await this.query.doc(idProducto).get();
+            const prodRespuesta=productos.data()
+            prodRespuesta.id=idProducto
+
+            return prodRespuesta //productos.data();
 
         }
         catch(error){
@@ -55,7 +54,7 @@ class ContenedorFirebase{
     async guardarUno(objeto) {
         try {
 
-            const res = await this.collection.add(objeto)
+            const res = await this.query.add(objeto)
             objeto.id=res.id
             return objeto;
 
@@ -69,7 +68,7 @@ class ContenedorFirebase{
     async borrarUno(idProducto){
 
         try {
-            const res = await this.collection.doc(idProducto).delete();
+            const res = await this.query.doc(idProducto).delete();
             return res;
         }
         catch(error) {
@@ -81,7 +80,7 @@ class ContenedorFirebase{
     async editaUno(idProducto, objeto) {
         
         try {
-            const res = await this.collection.doc(idProducto).update(objeto);
+            const res = await this.query.doc(idProducto).update(objeto);
             return res;
         }
         catch(error) {
@@ -91,7 +90,7 @@ class ContenedorFirebase{
     }
 
     async terminaConexion(){
-        /* await mongoose.connection.close() */
+        
     }
 }
 
